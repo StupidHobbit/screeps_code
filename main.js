@@ -1,9 +1,10 @@
 const Harvest = require('state.harvest');
 const Update = require('state.update');
+const Build = require('state.build');
 const Stock = require('state.stock');
 const Dummy = require('state.dummy');
 
-const states = [Harvest, Update, Stock, Dummy];
+const states = [Harvest, Update, Build, Stock, Dummy];
 const states_map = new Map();
 states.forEach(state => states_map[state.name] = state);
 
@@ -74,7 +75,7 @@ module.exports.loop = function () {
         if (state.action(creep, target) === ERR_NOT_IN_RANGE) {
             creep.moveTo(target, {visualizePathStyle: {stroke: state.stroke}});
         }
-        if (state.exit_condition(creep)){
+        if (state.exit_condition(creep, target)){
             creep.memory.state = null;
             target.room.memory[target.id + 'creeps_num']--;
         }
