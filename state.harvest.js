@@ -11,7 +11,7 @@ let stateHarvest = {
         let memory = target.room.memory;
         let res = memory[target.id + 'creeps_limit'];
         if (!res){
-            memory[target.id + 'creeps_limit'] = res = 8 - get_free_cells_of(target);
+            memory[target.id + 'creeps_limit'] = res = get_free_cells_of(target);
         }
         return res;
     },

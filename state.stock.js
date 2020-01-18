@@ -19,7 +19,7 @@ let stateStock = {
         return creep.transfer(target, RESOURCE_ENERGY);
     },
     exit_condition: function (creep) {
-        return creep.store.getFreeCapacity() !== 0;
+        return creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0;
     },
 };
 

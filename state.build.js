@@ -1,5 +1,5 @@
-let stateUpdate = {
-    name: 'update',
+let stateBuild = {
+    name: 'build',
     stroke: '#f40a5c',
     enter_condition: function (creep) {
         return creep.store.getFreeCapacity(RESOURCE_ENERGY) === 0;
@@ -14,8 +14,8 @@ let stateUpdate = {
         return creep.build(target);
     },
     exit_condition: function (creep, target) {
-        return creep.store.getFreeCapacity() !== 0 && target.progress < target.progressTotal;
+        return creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0 && target.progress < target.progressTotal;
     },
 };
 
-module.exports = stateUpdate;
+module.exports = stateBuild;

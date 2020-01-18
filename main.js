@@ -52,6 +52,21 @@ module.exports.loop = function () {
         'creep' + Game.time,
     );
 
+    for (let room_name in Game.rooms){
+        const room = Game.rooms[room_name];
+        const controller_pos = room.controller.pos;
+        const delta = 10;
+        if (room.find(FIND_CONSTRUCTION_SITES).length < 1) {
+            let code;
+            do {
+                let x = randomInteger(controller_pos.x - delta, controller_pos.x + delta);
+                let y = randomInteger(controller_pos.y - delta, controller_pos.y + delta);
+                code = room.createConstructionSite(x, y, STRUCTURE_EXTENSION);
+                console.log(code);
+            } while (code === ERR_INVALID_TARGET);
+        }
+    }
+
     for (let creep_name in Game.creeps) {
         let creep = Game.creeps[creep_name];
         let state = get_state(creep);
@@ -65,3 +80,9 @@ module.exports.loop = function () {
         }
     }
 };
+
+
+function randomInteger(min, max) {
+    let rand = min + Math.random() * (max + 1 - min);
+    return Math.floor(rand);
+}
